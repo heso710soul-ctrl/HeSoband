@@ -84,6 +84,6 @@ footer {
 /* スマホサイズ(画面幅768px以下)の場合 */
 @media (max-width: 768px) {
     .video-grid {
-        grid-template-columns: repeat(2, 1fr); /* スマホでは2列 */
+        grid-template-columns: repeat(1, 1fr); /* スマホでは2列 */
     }
 }
