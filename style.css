@@ -42,7 +42,7 @@ footer {
     position: relative;
     max-width: 100%;      /* 親要素の幅に対して100%の幅を使う */
     width: 1500px;        /* ただし最大1500pxまで */    
-    height: 1000px;
+    aspect-ratio: 3 / 2;  /* 幅3:高さ2の比率を保つ */
     margin: 20px auto;
     overflow: hidden;
     border-radius: 10px;
