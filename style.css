@@ -1,0 +1,89 @@
+/* 全体のベース */
+body {
+    font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+    background-color: #fdf6ec; /* あたたかいクリーム色 */
+    color: #4a3728; /* 深めのブラウン文字 */
+    line-height: 1.8;
+    margin: 0;
+    padding: 0 20px;
+}
+
+header {
+    text-align: center;
+    padding: 40px 0 20px;
+}
+
+h1 {
+    color: #b5651d; /* あたたかいオレンジブラウン */
+    font-size: 2.5em;
+}
+
+h2 {
+    color: #b5651d;
+    border-bottom: 2px solid #e8c39e;
+    padding-bottom: 5px;
+    margin-top: 60px;
+}
+
+a {
+    color: #c17a3d;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    color: #8a6d5c;
+    font-size: 0.9em;
+}
+
+/* スライドショー */
+.slideshow {
+    position: relative;
+    max-width: 100%;      /* 親要素の幅に対して100%の幅を使う */
+    width: 1500px;        /* ただし最大1500pxまで */    
+    height: 1000px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* YOUTUBE埋め込み */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* PCでは3列 */
+    gap: 20px;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.video-grid iframe {
+    width: 100%;
+    height: 200px;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* スマホサイズ(画面幅768px以下)の場合 */
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr); /* スマホでは2列 */
+    }
+}
