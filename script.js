@@ -13,6 +13,7 @@ setInterval(showNextSlide, 3000);
 // イベント情報をここで管理(今後増えたらここに追加するだけ!)
 const events = [
     { id: "event1", label: "2026.4.11 VORZ BAR", folder: "image/2026.4.11 VORZ BAR", count: 28, photographer: "Taro Nozawa" },
+    { id: "event2", label: "2024.12.22 ROCKATERIA", folder: "image/2024.12.22 ROCKATERIA", count: 12, photographer: "Taro Nozawa" },
     // 今後増えたらここにも photographer を追加
 ];
 
