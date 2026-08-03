@@ -1,13 +1,13 @@
 let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
 
 function showNextSlide() {
+    const slides = document.querySelectorAll('.slide');  // ← 関数の中に移動!毎回最新の状態を取得
+    if (slides.length === 0) return;  // 写真が無い場合は何もしない(安全対策)
     slides[currentSlide].classList.remove('active');
     currentSlide = (currentSlide + 1) % slides.length;
     slides[currentSlide].classList.add('active');
 }
 
-// 4秒ごとに自動で切り替え
 setInterval(showNextSlide, 3000);
 
 // イベント情報をここで管理(今後増えたらここに追加するだけ!)
@@ -17,6 +17,37 @@ const events = [
     { id: "event3", label: "2026.4.11 VORZ BAR", folder: "image/2026.4.11 VORZ BAR", count: 28, photographer: "Taro Nozawa" },
     // 今後増えたらここにも photographer を追加
 ];
+
+// スライドショー用:全イベントの写真からランダムに選ぶ
+function buildSlideshow(maxCount = 8) {
+    const slideshowContainer = document.getElementById('slideshow');
+
+    // 全イベントの写真パスを1つの配列にまとめる
+    let allPhotos = [];
+    events.forEach(event => {
+        for (let i = 1; i <= event.count; i++) {
+            const num = String(i).padStart(3, '0');
+            allPhotos.push(`${event.folder}/image_${num}.jpg`);
+        }
+    });
+
+    // シャッフル(Fisher-Yates法)
+    for (let i = allPhotos.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allPhotos[i], allPhotos[j]] = [allPhotos[j], allPhotos[i]];
+    }
+
+    // 指定した枚数だけ取り出す
+    const selectedPhotos = allPhotos.slice(0, maxCount);
+
+    // HTMLを生成
+    selectedPhotos.forEach((src, index) => {
+        const img = document.createElement('img');
+        img.src = encodeURI(src);
+        img.className = index === 0 ? 'slide active' : 'slide'; // 最初の1枚だけactive
+        slideshowContainer.appendChild(img);
+    });
+}
 
 // ギャラリーを自動生成する
 function buildGallery() {
@@ -76,5 +107,6 @@ function closeLightbox() {
     document.getElementById('lightbox').classList.remove('active');
 }
 
-// ページ読み込み時にギャラリー生成
+// ページ読み込み時に実行
 buildGallery();
+buildSlideshow(10);   // 10枚をランダム表示(好きな数字に変更OK)
