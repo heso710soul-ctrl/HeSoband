@@ -12,9 +12,8 @@ setInterval(showNextSlide, 3000);
 
 // イベント情報をここで管理(今後増えたらここに追加するだけ!)
 const events = [
-    { id: "event1", label: "2026.4.11 VORZ BAR", folder: "image/2026.4.11 VORZ BAR", count: 28 },
-    // 新しいイベントはここに追加していくだけ!
-    // { id: "event2", label: "イベント名", folder: "image/フォルダ名", count: 枚数 },
+    { id: "event1", label: "2026.4.11 VORZ BAR", folder: "image/2026.4.11 VORZ BAR", count: 28, photographer: "Taro Nozawa" },
+    // 今後増えたらここにも photographer を追加
 ];
 
 // ギャラリーを自動生成する
@@ -22,19 +21,20 @@ function buildGallery() {
     const tabsContainer = document.getElementById('gallery-tabs');
     const gridContainer = document.getElementById('gallery-grid');
 
-    // 「全部」ボタンを追加
-    tabsContainer.innerHTML = `<button class="tab-btn active" onclick="filterGallery('all', this)">全部</button>`;
+    // 「全部」ボタンを追加(最初はactiveクラスをつけない!)
+    tabsContainer.innerHTML = `<button class="tab-btn" onclick="filterGallery('all', this)">全部</button>`;
 
     events.forEach(event => {
         // タブボタンを追加
         tabsContainer.innerHTML += `<button class="tab-btn" onclick="filterGallery('${event.id}', this)">${event.label}</button>`;
 
-        // その回数分の画像を自動生成(3桁ゼロ埋め対応)
+        // その回数分の画像を自動生成(最初は非表示にする!)
         for (let i = 1; i <= event.count; i++) {
-            const num = String(i).padStart(3, '0'); // 1 → "001" に変換
+            const num = String(i).padStart(3, '0');
             const img = document.createElement('img');
-            img.src = encodeURI(`${event.folder}/image_${num}.jpg`); // スペース対応のためencodeURI
+            img.src = encodeURI(`${event.folder}/image_${num}.jpg`);
             img.dataset.event = event.id;
+            img.style.display = 'none';  // ← 最初は非表示にしておく
             img.onclick = function() { openLightbox(this); };
             gridContainer.appendChild(img);
         }
@@ -49,7 +49,21 @@ function filterGallery(eventId, btn) {
     });
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+
+    // 案内文を消す
+    const hint = document.getElementById('gallery-hint');
+    if (hint) hint.style.display = 'none';
+
+    // クレジット表示の切り替え
+    const credit = document.getElementById('gallery-credit');
+    if (eventId === 'all') {
+        credit.textContent = '';  // 「全部」表示の時はクレジット非表示(複数カメラマンが混在するため)
+    } else {
+        const event = events.find(e => e.id === eventId);
+        credit.textContent = event.photographer ? `Photo by ${event.photographer}` : '';
+    }
 }
+
 
 // ライトボックス(拡大表示)
 function openLightbox(imgElement) {
