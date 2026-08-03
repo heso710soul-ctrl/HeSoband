@@ -109,4 +109,4 @@ function closeLightbox() {
 
 // ページ読み込み時に実行
 buildGallery();
-buildSlideshow(10);   // 10枚をランダム表示(好きな数字に変更OK)
+buildSlideshow(20);   // 20枚をランダム表示(好きな数字に変更OK)
