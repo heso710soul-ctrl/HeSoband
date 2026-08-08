@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQ06E6NQ2D"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-EQ06E6NQ2D');
-    </script>
-
+    <!-- 基本設定(最優先で読み込まれるべきもの) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HeSo band official site</title>
+
+    <!-- SEO対策 -->
     <meta name="description" content="HeSo BANDの公式サイト。アコースティックレゲエ&トラッド系の5人組バンド。ライブ情報、動画、フォトギャラリーを掲載。">
     <meta property="og:title" content="HeSo BAND Official Site">
     <meta property="og:description" content="アコースティックレゲエ&トラッド系5人組バンド、HeSo BANDの公式サイト。">
@@ -22,16 +15,22 @@
     <meta property="og:type" content="website">
     <meta name="google-site-verification" content="vuZ0ag4ER_NhW0_gRKkp5x-szK58zbd5USsfOxLkwOw" />
 
-    <!-- ブラウザタブのアイコン(favicon) -->
+    <!-- アイコン設定 -->
     <link rel="icon" type="image/png" href="image/logo.png">
-
-    <!-- スマホのホーム画面追加用アイコン(iOS) -->
     <link rel="apple-touch-icon" href="image/logo.png">
-
-    <!-- スマホのホーム画面追加用アイコン(Android) -->
     <link rel="manifest" href="manifest.json">
 
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Analytics(外部サービス系は最後の方でも問題なし) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQ06E6NQ2D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQ06E6NQ2D');
+    </script>
 </head>
 <body>
     <header>
