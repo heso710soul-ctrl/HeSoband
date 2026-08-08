@@ -66,8 +66,8 @@ function buildGallery() {
             const num = String(i).padStart(3, '0');
             const img = document.createElement('img');
             img.src = encodeURI(`${event.folder}/image_${num}.jpg`);
+            img.alt = `${event.label} の写真`;   // ← これを追加!
             img.dataset.event = event.id;
-            img.style.display = 'none';  // ← 最初は非表示にしておく
             img.onclick = function() { openLightbox(this); };
             gridContainer.appendChild(img);
         }
