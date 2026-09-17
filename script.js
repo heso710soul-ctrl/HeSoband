@@ -15,6 +15,7 @@ const events = [
     { id: "event1", label: "2024.9.7 定禅寺ストリートジャズフェスティバル", folder: "image/2024.9.7 定禅寺ストリートジャズフェスティバル", count: 27, photographer: "Taro Nozawa" },
     { id: "event2", label: "2024.12.22 ROCKATERIA", folder: "image/2024.12.22 ROCKATERIA", count: 12, photographer: "Taro Nozawa" },
     { id: "event3", label: "2026.4.11 VORZ BAR", folder: "image/2026.4.11 VORZ BAR", count: 26, photographer: "Taro Nozawa" },
+    { id: "event4", label: "2026.9.12 定禅寺ストリートジャズフェスティバル", folder: "image/2026.9.12 定禅寺ストリートジャズフェスティバル", count: 17, photographer: "Taro Nozawa" },
     // 今後増えたらここにも photographer を追加
 ];
 
