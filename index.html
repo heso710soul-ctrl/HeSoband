@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- 基本設定(最優先で読み込まれるべきもの) -->
+    <!-- 基本設定 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HeSo band official site</title>
+    <title>HeSo BAND | へそバンド Official Website</title>
 
     <!-- SEO対策 -->
     <meta name="description" content="HeSo BANDの公式サイト。アコースティックレゲエ&トラッド系の5人組バンド。ライブ情報、動画、フォトギャラリーを掲載。">
@@ -20,10 +20,15 @@
     <link rel="apple-touch-icon" href="image/logo.png">
     <link rel="manifest" href="manifest.json">
 
+    <!-- フォント(英字:Cormorant Garamond / 日本語:Noto Sans JP) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Google Analytics(外部サービス系は最後の方でも問題なし) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQ06E6NQ2D"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,84 +38,159 @@
     </script>
 </head>
 <body>
-    <header>
-        <h1>HeSo BAND</h1>
-        <p>へそバンド Official Website</p>
+
+    <!-- ===== ヘッダー(固定・半透明) ===== -->
+    <header class="site-header">
+        <a href="#top" class="site-logo">HeSo BAND</a>
+        <button class="menu-btn" id="menu-btn" aria-label="メニューを開く" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
     </header>
 
-<div class="slideshow" id="slideshow"></div>
+    <!-- ===== メニュー(全画面) ===== -->
+    <nav class="menu" id="menu" aria-hidden="true">
+        <ul>
+            <li><a href="#about"><span class="en">About</span><span class="ja">へそバンドについて</span></a></li>
+            <li><a href="#members"><span class="en">Members</span><span class="ja">メンバー</span></a></li>
+            <li><a href="#schedule"><span class="en">Live</span><span class="ja">ライブ情報</span></a></li>
+            <li><a href="#video"><span class="en">Video</span><span class="ja">動画</span></a></li>
+            <li><a href="#gallery"><span class="en">Gallery</span><span class="ja">写真</span></a></li>
+            <li><a href="#contact"><span class="en">Contact</span><span class="ja">お問い合わせ</span></a></li>
+        </ul>
+    </nav>
 
-</div>
+    <!-- ===== ヒーロー(写真スライド + ガラス枠) ===== -->
+    <section class="hero" id="top">
+        <div class="slideshow" id="slideshow"></div>
+        <div class="hero-shade"></div>
+
+        <div class="hero-card">
+            <p class="hero-small">へそバンド</p>
+            <h1 class="hero-title">HeSo BAND</h1>
+            <p class="hero-genre">Acoustic Reggae / Trad / Sendai</p>
+            <p class="hero-copy">肩の力がすっと抜ける、<br>あたたかい音楽を。</p>
+            <p class="hero-lead">マンドリン、ピアニカ、ギター、ベース、ドラム。<br>5人で鳴らす、どこか懐かしいうた。</p>
+            <a href="#about" class="text-link">へそバンドを知る</a>
+        </div>
+
+        <a href="#schedule" class="hero-btn">Live Schedule</a>
+        <div class="hero-dots" id="hero-dots"></div>
+        <div class="hero-scroll"><span>Scroll</span></div>
+    </section>
+
     <main>
-        <section id="about">
-            <h2>About</h2>
-            <p>ボーカル＆アコギの「へそ」が描くあたたかい景色や切ない本音。</p>
-            <p>その世界観を、アコースティックレゲエやトラッドな雰囲気を背景に、マンドリンやピアニカ、ギター、ベース、ドラム、そして「へそ」の5人でどこまでも豊かに拡大させていくバンドがHeSo BAND。</p>
-            <p>どこか懐かしく、肩の力がすっと抜ける心地よさ。寄り添うような優しさもカッコつけない本音も全部ひっくるめたのが、HeSo BANDの音楽です。</p> 
-
-         <h3>Members</h3>
-    <ul>
-        <li>へそ｜Vo, AG</li>
-        <li>ハタナカ｜Mandolin, Pianica</li>
-        <li>のり｜Bass</li>
-        <li>トクヤ｜Dr</li>
-        <li>青木｜EG, Cho</li>
-    </ul>
-        </section>
-
-        <section id="schedule">
-            <h2>Live Schedule</h2>
-            <ul>
-                <li>2026年9月12日<br>
-                    JOZENJI "STREETJAZZ" FESTIVAL <br>
-                    勾当台公園　野外音楽堂（14:45~15:15出演予定）
-                </li>
-            </ul>
-        </section>
-
-        <section id="links">
-            <h2>Links</h2>
-            <ul>
-                <li><a href="https://www.youtube.com/@heso710" target="_blank">YouTube</a></li>
-            </ul>
-        </section>
-
-        <section id="video">
-            <h2>Video</h2>
-            <div class="video-grid">
-                <iframe  src="https://www.youtube.com/embed/bpHoQkqvdBM?si=t5Q-F4AGivmvV06J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <iframe  src="https://www.youtube.com/embed/YC1vJtp-64U?si=2JPhbbDTf2C9Dng6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <iframe  src="https://www.youtube.com/embed/vdKVLBKpXyU?si=YEvPlRri2HMT6dXk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <iframe  src="https://www.youtube.com/embed/T5pqog1BNcg?si=Ay-Bg6FoWZ0uzJcD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <iframe  src="https://www.youtube.com/embed/Rbq_1pLPoJY?si=CTxf4V__gsPnKJg5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <iframe  src="https://www.youtube.com/embed/pnPbvNqBwzw?si=HZ_gCeaOsz1ZuxDI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <!-- ===== About(明るい背景) ===== -->
+        <section id="about" class="section light">
+            <div class="inner">
+                <p class="label fade">About</p>
+                <h2 class="fade">へそバンドとは</h2>
+                <figure class="wide-photo fade">
+                    <img id="about-photo" src="image/Image.jpg" alt="HeSo BANDのライブ写真" loading="lazy">
+                </figure>
+                <div class="poem fade">
+                    <p>ボーカル＆アコギの「へそ」が描く、<br>あたたかい景色や切ない本音。</p>
+                    <p>その世界観を、アコースティックレゲエや<br>トラッドな雰囲気を背景に、<br>マンドリンやピアニカ、ギター、ベース、ドラム、<br>そして「へそ」の5人で<br>どこまでも豊かに広げていくバンド。</p>
+                    <p>どこか懐かしく、肩の力がすっと抜ける心地よさ。<br>寄り添うような優しさも、カッコつけない本音も、<br>全部ひっくるめたのが HeSo BAND の音楽です。</p>
+                </div>
             </div>
         </section>
 
-        <section id="gallery">
-             <h2>Gallery</h2>
-            <div class="gallery-tabs" id="gallery-tabs"></div>
-            <p id="gallery-hint" style="text-align:center; color:#8a6d5c;">イベントを選択</p>
-            <p id="gallery-credit" style="text-align:center; color:#8a6d5c; font-size:0.85em;"></p>
-            <div class="gallery-grid" id="gallery-grid"></div>
+        <!-- ===== Members(明るい背景) ===== -->
+        <section id="members" class="section light members-section">
+            <div class="inner">
+                <p class="label fade">Members</p>
+                <h2 class="fade">メンバー</h2>
+                <ul class="members">
+                    <li class="fade"><span class="m-name">へそ</span><span class="m-part">Vocal, Acoustic Guitar</span></li>
+                    <li class="fade"><span class="m-name">ハタナカ</span><span class="m-part">Mandolin, Pianica</span></li>
+                    <li class="fade"><span class="m-name">のり</span><span class="m-part">Bass</span></li>
+                    <li class="fade"><span class="m-name">トクヤ</span><span class="m-part">Drums</span></li>
+                    <li class="fade"><span class="m-name">青木</span><span class="m-part">Electric Guitar, Chorus</span></li>
+                </ul>
+            </div>
         </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>ライブ出演依頼・お問い合わせは以下のフォームからお願いします。</p>
-            <a href="https://forms.gle/7jGV1NCnWUinWhei7" target="_blank">お問い合わせフォームはこちら</a>
+        <!-- ===== Live Schedule(暗い背景) ===== -->
+        <section id="schedule" class="section dark">
+            <div class="inner">
+                <p class="label fade">Live Schedule</p>
+                <h2 class="fade">ライブ情報</h2>
+                <ul class="live-list">
+                    <li class="fade">
+                        <div class="live-date">
+                            <span class="y">2026</span>
+                            <span class="md">9.12</span>
+                            <span class="w">Sat</span>
+                        </div>
+                        <div class="live-body">
+                            <p class="live-title">JOZENJI "STREETJAZZ" FESTIVAL</p>
+                            <p class="live-place">勾当台公園 野外音楽堂</p>
+                            <p class="live-time">14:45〜15:15 出演予定</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== Video(暗い背景) ===== -->
+        <section id="video" class="section dark video-section">
+            <div class="inner">
+                <p class="label fade">Video</p>
+                <h2 class="fade">動画</h2>
+                <div class="video-grid">
+                    <div class="video fade"><iframe src="https://www.youtube.com/embed/bpHoQkqvdBM" title="HeSo BAND 動画1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                    <div class="video fade"><iframe src="https://www.youtube.com/embed/YC1vJtp-64U" title="HeSo BAND 動画2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                    <div class="video fade"><iframe src="https://www.youtube.com/embed/vdKVLBKpXyU" title="HeSo BAND 動画3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                    <div class="video fade"><iframe src="https://www.youtube.com/embed/T5pqog1BNcg" title="HeSo BAND 動画4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                    <div class="video fade"><iframe src="https://www.youtube.com/embed/Rbq_1pLPoJY" title="HeSo BAND 動画5" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                    <div class="video fade"><iframe src="https://www.youtube.com/embed/pnPbvNqBwzw" title="HeSo BAND 動画6" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                </div>
+                <a href="https://www.youtube.com/@heso710" target="_blank" rel="noopener" class="text-link light-link fade">YouTubeチャンネルへ ↗</a>
+            </div>
+        </section>
+
+        <!-- ===== Gallery(明るい背景) ===== -->
+        <section id="gallery" class="section light">
+            <div class="inner">
+                <p class="label fade">Gallery</p>
+                <h2 class="fade">写真</h2>
+                <div class="gallery-tabs fade" id="gallery-tabs"></div>
+                <p id="gallery-credit" class="gallery-credit"></p>
+                <div class="gallery-grid" id="gallery-grid"></div>
+            </div>
+        </section>
+
+        <!-- ===== Contact(暗い背景) ===== -->
+        <section id="contact" class="section dark contact-section">
+            <div class="inner">
+                <p class="label fade">Contact</p>
+                <h2 class="fade">お問い合わせ</h2>
+                <p class="contact-copy fade">ライブ出演のご依頼や、<br>お問い合わせはこちらから。</p>
+                <p class="contact-lead fade">イベント・お店でのライブ出演依頼など、どうぞお気軽にご連絡ください。</p>
+                <a href="https://forms.gle/7jGV1NCnWUinWhei7" target="_blank" rel="noopener" class="contact-btn fade">
+                    <span>Contact Form</span><span class="arrow">→</span>
+                </a>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 HeSo. All Rights Reserved.</p>
+    <footer class="site-footer">
+        <p class="footer-logo">HeSo BAND</p>
+        <ul class="footer-links">
+            <li><a href="https://www.youtube.com/@heso710" target="_blank" rel="noopener">YouTube</a></li>
+            <li><a href="https://forms.gle/7jGV1NCnWUinWhei7" target="_blank" rel="noopener">Contact</a></li>
+        </ul>
+        <p class="copy">&copy; 2026 HeSo. All Rights Reserved.</p>
     </footer>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="">
+    <!-- ライトボックス(拡大表示) -->
+    <div id="lightbox" class="lightbox">
+        <button class="lb-close" aria-label="閉じる">×</button>
+        <button class="lb-prev" aria-label="前の写真">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lb-next" aria-label="次の写真">›</button>
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
