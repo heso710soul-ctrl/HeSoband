@@ -16,14 +16,14 @@
     <meta name="google-site-verification" content="vuZ0ag4ER_NhW0_gRKkp5x-szK58zbd5USsfOxLkwOw" />
 
     <!-- アイコン設定 -->
-    <link rel="icon" type="image/png" href="image/logo.png">
+    <link rel="icon" type="image/png" href="image/logo-small.png">
     <link rel="apple-touch-icon" href="image/logo.png">
     <link rel="manifest" href="manifest.json">
 
-    <!-- フォント(英字:Cormorant Garamond / 日本語:Noto Sans JP) -->
+    <!-- フォント(英字:Fraunces / 日本語:Zen Maru Gothic) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
@@ -39,104 +39,123 @@
 </head>
 <body>
 
-    <!-- ===== ヘッダー(固定・半透明) ===== -->
-    <header class="site-header">
-        <a href="#top" class="site-logo">HeSo BAND</a>
+    <!-- ===== ヘッダー ===== -->
+    <header class="site-header" id="site-header">
+        <a href="#top" class="site-logo">
+            <img src="image/logo-small.png" alt="">
+            <span>HeSo BAND</span>
+        </a>
+        <nav class="nav" id="nav">
+            <a href="#about">About</a>
+            <a href="#members">Members</a>
+            <a href="#schedule">Live</a>
+            <a href="#video">Video</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact" class="nav-contact">Contact</a>
+        </nav>
         <button class="menu-btn" id="menu-btn" aria-label="メニューを開く" aria-expanded="false">
-            <span></span><span></span><span></span>
+            <span></span><span></span>
         </button>
     </header>
 
-    <!-- ===== メニュー(全画面) ===== -->
-    <nav class="menu" id="menu" aria-hidden="true">
-        <ul>
-            <li><a href="#about"><span class="en">About</span><span class="ja">へそバンドについて</span></a></li>
-            <li><a href="#members"><span class="en">Members</span><span class="ja">メンバー</span></a></li>
-            <li><a href="#schedule"><span class="en">Live</span><span class="ja">ライブ情報</span></a></li>
-            <li><a href="#video"><span class="en">Video</span><span class="ja">動画</span></a></li>
-            <li><a href="#gallery"><span class="en">Gallery</span><span class="ja">写真</span></a></li>
-            <li><a href="#contact"><span class="en">Contact</span><span class="ja">お問い合わせ</span></a></li>
-        </ul>
-    </nav>
-
-    <!-- ===== ヒーロー(写真スライド + ガラス枠) ===== -->
+    <!-- ===== ヒーロー ===== -->
     <section class="hero" id="top">
         <div class="slideshow" id="slideshow"></div>
         <div class="hero-shade"></div>
 
-        <div class="hero-card">
-            <p class="hero-small">へそバンド</p>
-            <h1 class="hero-title">HeSo BAND</h1>
-            <p class="hero-genre">Acoustic Reggae / Trad / Sendai</p>
+        <p class="hero-vertical">へそバンド</p>
+
+        <div class="hero-text">
+            <p class="hero-genre">Acoustic Reggae &amp; Trad Band from Sendai</p>
+            <h1 class="hero-title">HeSo <em>BAND</em></h1>
             <p class="hero-copy">肩の力がすっと抜ける、<br>あたたかい音楽を。</p>
-            <p class="hero-lead">マンドリン、ピアニカ、ギター、ベース、ドラム。<br>5人で鳴らす、どこか懐かしいうた。</p>
-            <a href="#about" class="text-link">へそバンドを知る</a>
         </div>
 
-        <a href="#schedule" class="hero-btn">Live Schedule</a>
-        <div class="hero-dots" id="hero-dots"></div>
-        <div class="hero-scroll"><span>Scroll</span></div>
+        <div class="hero-counter"><span id="slide-now">01</span> / <span id="slide-total">06</span></div>
     </section>
 
+    <!-- ===== 流れる帯 ===== -->
+    <div class="ticker" aria-hidden="true">
+        <div class="ticker-track" id="ticker-track"></div>
+    </div>
+
     <main>
-        <!-- ===== About(明るい背景) ===== -->
-        <section id="about" class="section light">
-            <div class="inner">
-                <p class="label fade">About</p>
-                <h2 class="fade">へそバンドとは</h2>
-                <figure class="wide-photo fade">
-                    <img id="about-photo" src="image/Image.jpg" alt="HeSo BANDのライブ写真" loading="lazy">
-                </figure>
-                <div class="poem fade">
-                    <p>ボーカル＆アコギの「へそ」が描く、<br>あたたかい景色や切ない本音。</p>
-                    <p>その世界観を、アコースティックレゲエや<br>トラッドな雰囲気を背景に、<br>マンドリンやピアニカ、ギター、ベース、ドラム、<br>そして「へそ」の5人で<br>どこまでも豊かに広げていくバンド。</p>
-                    <p>どこか懐かしく、肩の力がすっと抜ける心地よさ。<br>寄り添うような優しさも、カッコつけない本音も、<br>全部ひっくるめたのが HeSo BAND の音楽です。</p>
+        <!-- ===== About ===== -->
+        <section id="about" class="section cream">
+            <div class="inner about-grid">
+                <div class="about-photo fade">
+                    <img src="image/Image.jpg" alt="HeSo BANDのライブ写真" loading="lazy">
+                    <span class="sunburst" aria-hidden="true"></span>
+                </div>
+                <div class="about-text">
+                    <div class="heading fade">
+                        <span class="num">01</span>
+                        <p class="en">About</p>
+                        <h2>へそバンドのこと</h2>
+                    </div>
+                    <p class="about-lead fade">どこか懐かしくて、<br>ちょっとだけ本音。</p>
+                    <div class="fade">
+                        <p>ボーカル＆アコギの「へそ」が描く、あたたかい景色や切ない本音。</p>
+                        <p>その世界観を、アコースティックレゲエやトラッドな雰囲気を背景に、マンドリンやピアニカ、ギター、ベース、ドラム、そして「へそ」の5人でどこまでも豊かに広げていくバンドがHeSo BANDです。</p>
+                        <p>寄り添うような優しさも、カッコつけない本音も、全部ひっくるめて鳴らしています。</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===== Members(明るい背景) ===== -->
-        <section id="members" class="section light members-section">
+        <!-- ===== Members ===== -->
+        <section id="members" class="section cream members-section">
             <div class="inner">
-                <p class="label fade">Members</p>
-                <h2 class="fade">メンバー</h2>
+                <div class="heading center fade">
+                    <span class="num">02</span>
+                    <p class="en">Members</p>
+                    <h2>5人のメンバー</h2>
+                </div>
                 <ul class="members">
-                    <li class="fade"><span class="m-name">へそ</span><span class="m-part">Vocal, Acoustic Guitar</span></li>
-                    <li class="fade"><span class="m-name">ハタナカ</span><span class="m-part">Mandolin, Pianica</span></li>
-                    <li class="fade"><span class="m-name">のり</span><span class="m-part">Bass</span></li>
-                    <li class="fade"><span class="m-name">トクヤ</span><span class="m-part">Drums</span></li>
-                    <li class="fade"><span class="m-name">青木</span><span class="m-part">Electric Guitar, Chorus</span></li>
+                    <li class="fade"><span class="badge">へ</span><span class="m-name">へそ</span><span class="m-part">Vo, A.Gt</span></li>
+                    <li class="fade"><span class="badge">ハ</span><span class="m-name">ハタナカ</span><span class="m-part">Mandolin, Pianica</span></li>
+                    <li class="fade"><span class="badge">の</span><span class="m-name">のり</span><span class="m-part">Bass</span></li>
+                    <li class="fade"><span class="badge">ト</span><span class="m-name">トクヤ</span><span class="m-part">Drums</span></li>
+                    <li class="fade"><span class="badge">青</span><span class="m-name">青木</span><span class="m-part">E.Gt, Cho</span></li>
                 </ul>
             </div>
         </section>
 
-        <!-- ===== Live Schedule(暗い背景) ===== -->
-        <section id="schedule" class="section dark">
+        <!-- 波線の区切り(クリーム → 青緑) -->
+        <svg class="wave wave-to-teal" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1350,20 1440,40 L1440,80 L0,80 Z"/></svg>
+
+        <!-- ===== Live ===== -->
+        <section id="schedule" class="section teal">
             <div class="inner">
-                <p class="label fade">Live Schedule</p>
-                <h2 class="fade">ライブ情報</h2>
-                <ul class="live-list">
-                    <li class="fade">
-                        <div class="live-date">
-                            <span class="y">2026</span>
+                <div class="heading fade">
+                    <span class="num">03</span>
+                    <p class="en">Live Schedule</p>
+                    <h2>ライブ情報</h2>
+                </div>
+                <ul class="tickets">
+                    <li class="ticket fade">
+                        <div class="ticket-date">
                             <span class="md">9.12</span>
-                            <span class="w">Sat</span>
+                            <span class="yw">2026 / SAT</span>
                         </div>
-                        <div class="live-body">
-                            <p class="live-title">JOZENJI "STREETJAZZ" FESTIVAL</p>
-                            <p class="live-place">勾当台公園 野外音楽堂</p>
-                            <p class="live-time">14:45〜15:15 出演予定</p>
+                        <div class="ticket-body">
+                            <p class="ticket-title">JOZENJI "STREETJAZZ" FESTIVAL</p>
+                            <p>勾当台公園 野外音楽堂</p>
+                            <p>14:45〜15:15 出演予定</p>
                         </div>
                     </li>
                 </ul>
             </div>
         </section>
 
-        <!-- ===== Video(暗い背景) ===== -->
-        <section id="video" class="section dark video-section">
+        <!-- ===== Video ===== -->
+        <section id="video" class="section teal video-section">
             <div class="inner">
-                <p class="label fade">Video</p>
-                <h2 class="fade">動画</h2>
+                <div class="heading fade">
+                    <span class="num">04</span>
+                    <p class="en">Video</p>
+                    <h2>動画</h2>
+                </div>
                 <div class="video-grid">
                     <div class="video fade"><iframe src="https://www.youtube.com/embed/bpHoQkqvdBM" title="HeSo BAND 動画1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
                     <div class="video fade"><iframe src="https://www.youtube.com/embed/YC1vJtp-64U" title="HeSo BAND 動画2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
@@ -145,37 +164,44 @@
                     <div class="video fade"><iframe src="https://www.youtube.com/embed/Rbq_1pLPoJY" title="HeSo BAND 動画5" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
                     <div class="video fade"><iframe src="https://www.youtube.com/embed/pnPbvNqBwzw" title="HeSo BAND 動画6" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
                 </div>
-                <a href="https://www.youtube.com/@heso710" target="_blank" rel="noopener" class="text-link light-link fade">YouTubeチャンネルへ ↗</a>
+                <a href="https://www.youtube.com/@heso710" target="_blank" rel="noopener" class="pill-btn fade">YouTubeチャンネルを見る</a>
             </div>
         </section>
 
-        <!-- ===== Gallery(明るい背景) ===== -->
-        <section id="gallery" class="section light">
+        <!-- 波線の区切り(青緑 → クリーム) -->
+        <svg class="wave wave-to-cream" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1350,20 1440,40 L1440,80 L0,80 Z"/></svg>
+
+        <!-- ===== Gallery ===== -->
+        <section id="gallery" class="section cream">
             <div class="inner">
-                <p class="label fade">Gallery</p>
-                <h2 class="fade">写真</h2>
+                <div class="heading fade">
+                    <span class="num">05</span>
+                    <p class="en">Gallery</p>
+                    <h2>ライブ写真</h2>
+                </div>
                 <div class="gallery-tabs fade" id="gallery-tabs"></div>
                 <p id="gallery-credit" class="gallery-credit"></p>
                 <div class="gallery-grid" id="gallery-grid"></div>
             </div>
         </section>
 
-        <!-- ===== Contact(暗い背景) ===== -->
-        <section id="contact" class="section dark contact-section">
-            <div class="inner">
-                <p class="label fade">Contact</p>
-                <h2 class="fade">お問い合わせ</h2>
-                <p class="contact-copy fade">ライブ出演のご依頼や、<br>お問い合わせはこちらから。</p>
-                <p class="contact-lead fade">イベント・お店でのライブ出演依頼など、どうぞお気軽にご連絡ください。</p>
-                <a href="https://forms.gle/7jGV1NCnWUinWhei7" target="_blank" rel="noopener" class="contact-btn fade">
-                    <span>Contact Form</span><span class="arrow">→</span>
-                </a>
+        <!-- ===== Contact ===== -->
+        <section id="contact" class="contact">
+            <div class="inner contact-inner">
+                <span class="sunburst big" aria-hidden="true"></span>
+                <div class="heading center fade">
+                    <span class="num">06</span>
+                    <p class="en">Contact</p>
+                    <h2>呼んでください、<br>どこへでも。</h2>
+                </div>
+                <p class="contact-lead fade">イベントやお店でのライブ出演依頼、<br>お問い合わせはこちらからどうぞ。</p>
+                <a href="https://forms.gle/7jGV1NCnWUinWhei7" target="_blank" rel="noopener" class="contact-btn fade">お問い合わせフォーム</a>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <p class="footer-logo">HeSo BAND</p>
+        <img src="image/logo-small.png" alt="HeSo BAND" class="footer-logo">
         <ul class="footer-links">
             <li><a href="https://www.youtube.com/@heso710" target="_blank" rel="noopener">YouTube</a></li>
             <li><a href="https://forms.gle/7jGV1NCnWUinWhei7" target="_blank" rel="noopener">Contact</a></li>

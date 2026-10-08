@@ -25,7 +25,8 @@ function photoPath(event, i) {
 // ==========================================
 function buildSlideshow() {
     const container = document.getElementById('slideshow');
-    const dots = document.getElementById('hero-dots');
+    const nowEl = document.getElementById('slide-now');
+    const totalEl = document.getElementById('slide-total');
 
     let all = [];
     events.forEach(ev => {
@@ -46,23 +47,38 @@ function buildSlideshow() {
         img.className = index === 0 ? 'slide active' : 'slide';
         if (index > 0) img.loading = 'lazy';
         container.appendChild(img);
-
-        const dot = document.createElement('span');
-        if (index === 0) dot.className = 'active';
-        dots.appendChild(dot);
     });
+
+    const pad = n => String(n).padStart(2, '0');
+    totalEl.textContent = pad(picked.length);
 
     let current = 0;
     setInterval(() => {
         const slides = container.querySelectorAll('.slide');
-        const dotEls = dots.querySelectorAll('span');
         if (slides.length < 2) return;
         slides[current].classList.remove('active');
-        dotEls[current].classList.remove('active');
         current = (current + 1) % slides.length;
         slides[current].classList.add('active');
-        dotEls[current].classList.add('active');
+        nowEl.textContent = pad(current + 1);
     }, SLIDE_INTERVAL);
+}
+
+// ==========================================
+// 流れる帯(次のライブなど、好きな言葉に変更OK)
+// ==========================================
+const TICKER_WORDS = [
+    'HeSo BAND',
+    'Acoustic Reggae & Trad',
+    'From Sendai',
+    'Mandolin / Pianica / Guitar / Bass / Drums',
+    'Thank you for listening',
+];
+
+function buildTicker() {
+    const track = document.getElementById('ticker-track');
+    const line = TICKER_WORDS.map(w => `${w}<i>✺</i>`).join(' ');
+    // 2回並べて途切れずにループさせる
+    track.innerHTML = `<span>${line}</span><span>${line}</span>`;
 }
 
 // ==========================================
@@ -177,18 +193,24 @@ lightbox.addEventListener('touchend', e => {
 });
 
 // ==========================================
-// メニュー(ハンバーガー)
+// メニュー(スマホ・タブレット)とヘッダーの色切り替え
 // ==========================================
 const menuBtn = document.getElementById('menu-btn');
-const menu = document.getElementById('menu');
+const nav = document.getElementById('nav');
+const header = document.getElementById('site-header');
 
 function setMenu(open) {
     document.body.classList.toggle('menu-open', open);
     menuBtn.setAttribute('aria-expanded', open);
-    menu.setAttribute('aria-hidden', !open);
 }
 menuBtn.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
-menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+function updateHeader() {
+    header.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.6);
+}
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
 
 // ==========================================
 // スクロールでふわっと表示
@@ -208,4 +230,5 @@ document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 // ページ読み込み時に実行
 // ==========================================
 buildSlideshow();
+buildTicker();
 buildGallery();
