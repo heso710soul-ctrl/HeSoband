@@ -11,7 +11,7 @@ const events = [
 ];
 
 // ヒーローのスライド枚数(好きな数字に変更OK)
-const SLIDE_COUNT = 6;
+const SLIDE_COUNT = 10;
 // スライドが切り替わる間隔(ミリ秒)
 const SLIDE_INTERVAL = 5000;
 
@@ -25,8 +25,6 @@ function photoPath(event, i) {
 // ==========================================
 function buildSlideshow() {
     const container = document.getElementById('slideshow');
-    const nowEl = document.getElementById('slide-now');
-    const totalEl = document.getElementById('slide-total');
 
     let all = [];
     events.forEach(ev => {
@@ -49,9 +47,6 @@ function buildSlideshow() {
         container.appendChild(img);
     });
 
-    const pad = n => String(n).padStart(2, '0');
-    totalEl.textContent = pad(picked.length);
-
     let current = 0;
     setInterval(() => {
         const slides = container.querySelectorAll('.slide');
@@ -59,7 +54,6 @@ function buildSlideshow() {
         slides[current].classList.remove('active');
         current = (current + 1) % slides.length;
         slides[current].classList.add('active');
-        nowEl.textContent = pad(current + 1);
     }, SLIDE_INTERVAL);
 }
 
