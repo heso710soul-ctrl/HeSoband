@@ -1,0 +1,4 @@
+# GitHub Pages の設定
+# contact-form-gas フォルダ（お問い合わせの受け取りスクリプト）はサイトに公開しない
+exclude:
+  - contact-form-gas/

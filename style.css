@@ -558,6 +558,126 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .contact-btn:hover { transform: translateY(3px); box-shadow: 0 3px 0 var(--ink); }
 
+/* ---------- お問い合わせフォーム ---------- */
+.sp-only { display: none; }
+.contact-form {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 44px 48px 40px;
+    text-align: left;
+    background: var(--cream);
+    border: 2px solid var(--ink);
+    border-radius: 22px;
+    box-shadow: 0 10px 0 var(--ink);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+.field { margin: 0 0 22px; padding: 0; border: 0; min-width: 0; }
+.field label,
+.field legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding: 0;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+.req, .opt {
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+.req { background: var(--teal); color: var(--cream); }
+.opt { background: var(--cream-deep); color: var(--ink-sub); }
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="tel"],
+.field textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1.5px solid rgba(43, 42, 38, 0.35);
+    border-radius: 12px;
+    background: #fffdf8;
+    color: var(--ink);
+    font: inherit;
+    font-size: 1rem;           /* 16px以上:iPhoneで入力時に拡大されないように */
+    line-height: 1.6;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field textarea { resize: vertical; min-height: 150px; }
+.field input::placeholder,
+.field textarea::placeholder { color: #a39a8c; }
+.field input:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 4px rgba(36, 77, 95, 0.18);
+}
+
+/* ご用件(ボタン型のラジオ) */
+.choices { display: flex; flex-wrap: wrap; gap: 10px; }
+.choice { position: relative; cursor: pointer; }
+.choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.choice span {
+    display: inline-block;
+    padding: 9px 18px;
+    border: 1.5px solid rgba(43, 42, 38, 0.35);
+    border-radius: 999px;
+    background: #fffdf8;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.choice:hover span { border-color: var(--teal); }
+.choice input:checked + span { background: var(--teal); border-color: var(--teal); color: var(--cream); }
+.choice input:focus-visible + span { box-shadow: 0 0 0 4px rgba(36, 77, 95, 0.25); }
+
+/* 演奏のご依頼のときだけ出す欄 */
+.event-only[hidden] { display: none; }
+
+/* エラー表示 */
+.has-error input,
+.has-error textarea,
+.has-error .choice span { border-color: #b3412e; }
+.field-error { margin: 6px 0 0; color: #a3341f; font-size: 0.85rem; font-weight: 700; }
+
+/* ボット対策の見えない欄 */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.contact-form__privacy { margin: 4px 0 24px; font-size: 0.82rem; color: var(--ink-sub); text-align: center; }
+.contact-form__submit {
+    display: block;
+    margin: 0 auto;
+    border: 0;
+    cursor: pointer;
+    font-family: var(--ja);
+}
+.contact-form__submit:disabled { opacity: 0.6; cursor: wait; transform: none; }
+.contact-form__status { min-height: 1.5em; margin: 18px 0 0; text-align: center; font-weight: 700; }
+.contact-form__status.is-error { color: #a3341f; }
+.contact-form__status a { color: var(--teal); }
+
+/* 送信完了 */
+.contact-done { text-align: center; padding: 20px 0 8px; outline: none; }
+.contact-done h3 { margin: 0 0 12px; font-size: 1.35rem; color: var(--teal); }
+.contact-done p { margin: 0 0 8px; color: var(--ink-sub); }
+.contact-done .done-mark {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: var(--mustard);
+    color: var(--ink);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
 /* ==========================================
    フッター
 ========================================== */
@@ -723,6 +843,11 @@ ul { list-style: none; margin: 0; padding: 0; }
     .contact { padding: 90px 0; }
     .contact .sunburst.big { width: 380px; margin: -190px 0 0 -190px; }
     .contact-btn { padding: 18px 36px; font-size: 1rem; }
+    .sp-only { display: inline; }
+    .contact-form { padding: 28px 20px 26px; border-radius: 18px; box-shadow: 0 7px 0 var(--ink); }
+    .form-row { grid-template-columns: 1fr; }
+    .choice span { padding: 8px 14px; font-size: 0.88rem; }
+    .contact-form__submit { width: 100%; }
 }
 
 /* 動きを減らす設定の人には、アニメーションを止める */

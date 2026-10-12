@@ -202,8 +202,65 @@
                     <p class="en">Contact</p>
                     <h2>呼んでください、<br>どこへでも。</h2>
                 </div>
-                <p class="contact-lead fade">イベントやお店でのライブ出演依頼、<br>お問い合わせはこちらからどうぞ。</p>
-                <a href="https://forms.gle/7jGV1NCnWUinWhei7" target="_blank" rel="noopener" class="contact-btn fade">お問い合わせフォーム</a>
+                <p class="contact-lead fade">イベントやお店でのライブ出演依頼、<br>お問い合わせはこちらからどうぞ。<br class="sp-only">内容を確認して、メールでお返事します。</p>
+
+                <!-- お問い合わせフォーム
+                     data-endpoint に Google Apps Script のURLを入れると使えるようになります(手順は contact-form-gas/README.md)。
+                     空のあいだは、送信ボタンを押すと data-fallback(旧Googleフォーム)を案内します。 -->
+                <form class="contact-form fade" id="contact-form" data-endpoint="" data-fallback="https://forms.gle/7jGV1NCnWUinWhei7" novalidate>
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="cf-name">お名前<span class="req">必須</span></label>
+                            <input id="cf-name" name="name" type="text" autocomplete="name" required>
+                        </div>
+                        <div class="field">
+                            <label for="cf-org">団体・お店・イベント名<span class="opt">任意</span></label>
+                            <input id="cf-org" name="organization" type="text" autocomplete="organization">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="cf-email">メールアドレス<span class="req">必須</span></label>
+                            <input id="cf-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+                        </div>
+                        <div class="field">
+                            <label for="cf-tel">電話番号<span class="opt">任意</span></label>
+                            <input id="cf-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel">
+                        </div>
+                    </div>
+                    <fieldset class="field field--choices">
+                        <legend>ご用件<span class="req">必須</span></legend>
+                        <div class="choices">
+                            <label class="choice"><input type="radio" name="topic" value="ライブ出演のご依頼" required><span>ライブ出演のご依頼</span></label>
+                            <label class="choice"><input type="radio" name="topic" value="イベント・パーティーでの演奏"><span>イベント・パーティーでの演奏</span></label>
+                            <label class="choice"><input type="radio" name="topic" value="取材・メディア"><span>取材・メディア</span></label>
+                            <label class="choice"><input type="radio" name="topic" value="感想・メッセージ"><span>感想・メッセージ</span></label>
+                            <label class="choice"><input type="radio" name="topic" value="その他"><span>その他</span></label>
+                        </div>
+                    </fieldset>
+                    <div class="form-row event-only">
+                        <div class="field">
+                            <label for="cf-date">開催予定日<span class="opt">任意</span></label>
+                            <input id="cf-date" name="date" type="text" placeholder="例）2026年12月中旬の土曜日">
+                        </div>
+                        <div class="field">
+                            <label for="cf-venue">会場・場所<span class="opt">任意</span></label>
+                            <input id="cf-venue" name="venue" type="text" placeholder="例）仙台市内のカフェ">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="cf-message">内容<span class="req">必須</span></label>
+                        <textarea id="cf-message" name="message" rows="6" required placeholder="例）お店のイベントで30分ほど演奏をお願いしたいです。アコースティック編成が希望です。"></textarea>
+                    </div>
+                    <!-- ボット対策(人には見えない欄です。入力があった送信は受け付けません) -->
+                    <div class="hp" aria-hidden="true">
+                        <label for="cf-website">ウェブサイト</label>
+                        <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
+                    </div>
+                    <p class="contact-form__privacy">いただいた情報は、お問い合わせへのご連絡のためだけに使います。</p>
+                    <button class="contact-btn contact-form__submit" type="submit">この内容で送信する</button>
+                    <p class="contact-form__status" role="status" aria-live="polite"></p>
+                </form>
             </div>
         </section>
     </main>
@@ -212,7 +269,7 @@
         <img src="image/logo-small.png" alt="HeSo BAND" class="footer-logo">
         <ul class="footer-links">
             <li><a href="https://www.youtube.com/@heso710" target="_blank" rel="noopener">YouTube</a></li>
-            <li><a href="https://forms.gle/7jGV1NCnWUinWhei7" target="_blank" rel="noopener">Contact</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
         <p class="copy">&copy; 2026 HeSo. All Rights Reserved.</p>
     </footer>

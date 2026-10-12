@@ -221,6 +221,152 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
 // ==========================================
+// お問い合わせフォーム
+//   送信先は index.html のフォームの data-endpoint(Google Apps Script のURL)です。
+//   届いた内容は Gmail に通知され、スプレッドシートにも記録されます。
+// ==========================================
+(function () {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const endpoint = (form.dataset.endpoint || '').trim();
+    const fallback = (form.dataset.fallback || '').trim();
+    const status = form.querySelector('.contact-form__status');
+    const submit = form.querySelector('.contact-form__submit');
+    const eventFields = form.querySelector('.event-only');
+
+    // 演奏のご依頼のときだけ「開催予定日・会場」の欄を出す
+    const EVENT_TOPICS = ['ライブ出演のご依頼', 'イベント・パーティーでの演奏'];
+    function updateEventFields() {
+        const checked = form.querySelector('input[name="topic"]:checked');
+        eventFields.hidden = !(checked && EVENT_TOPICS.includes(checked.value));
+    }
+    form.querySelectorAll('input[name="topic"]').forEach(r => r.addEventListener('change', updateEventFields));
+    updateEventFields();
+
+    // 入力し直したら、その欄のエラー表示を消す
+    form.addEventListener('input', e => clearFieldError(e.target));
+    form.addEventListener('change', e => clearFieldError(e.target));
+    function clearFieldError(el) {
+        const wrap = el.closest && el.closest('.field');
+        if (!wrap || !wrap.classList.contains('has-error')) return;
+        wrap.classList.remove('has-error');
+        wrap.querySelectorAll('.field-error').forEach(x => x.remove());
+        wrap.querySelectorAll('[aria-invalid]').forEach(x => { x.removeAttribute('aria-invalid'); x.removeAttribute('aria-describedby'); });
+    }
+
+    const messages = {
+        name: 'お名前を入力してください。',
+        email: 'メールアドレスを入力してください。',
+        emailFormat: 'メールアドレスの形式をご確認ください(例:name@example.com)。',
+        topic: 'ご用件を選んでください。',
+        message: '内容を入力してください。'
+    };
+
+    function clearErrors() {
+        form.querySelectorAll('.field-error').forEach(el => el.remove());
+        form.querySelectorAll('.has-error').forEach(el => el.classList.remove('has-error'));
+        form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+    }
+
+    function showError(field, text) {
+        const wrap = field.closest('.field');
+        wrap.classList.add('has-error');
+        const p = document.createElement('p');
+        p.className = 'field-error';
+        p.id = (field.id || field.name) + '-error';
+        p.textContent = text;
+        wrap.appendChild(p);
+        field.setAttribute('aria-invalid', 'true');
+        field.setAttribute('aria-describedby', p.id);
+    }
+
+    function validate() {
+        clearErrors();
+        const errors = [];
+        const name = form.elements.name;
+        const email = form.elements.email;
+        const message = form.elements.message;
+        const topicChecked = form.querySelector('input[name="topic"]:checked');
+
+        if (!name.value.trim()) errors.push([name, messages.name]);
+        if (!email.value.trim()) errors.push([email, messages.email]);
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) errors.push([email, messages.emailFormat]);
+        if (!topicChecked) errors.push([form.querySelector('input[name="topic"]'), messages.topic]);
+        if (!message.value.trim()) errors.push([message, messages.message]);
+
+        errors.forEach(([field, text]) => showError(field, text));
+        if (errors.length) errors[0][0].focus();
+        return errors.length === 0;
+    }
+
+    function setStatus(html, isError) {
+        status.innerHTML = html;
+        status.classList.toggle('is-error', !!isError);
+    }
+
+    function fallbackLink(text) {
+        return fallback ? '<a href="' + fallback + '" target="_blank" rel="noopener">' + text + '</a>' : '別の方法';
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validate()) return;
+
+        // 送信先がまだ設定されていないあいだは、旧フォームを案内する
+        if (!endpoint) {
+            setStatus('ただいまフォームの準備中です。お手数ですが、' + fallbackLink('こちらのフォーム') + 'からお送りください。', true);
+            return;
+        }
+
+        // 演奏以外のご用件では、隠れている日付・会場欄は送らない
+        if (eventFields.hidden) {
+            form.elements.date.value = '';
+            form.elements.venue.value = '';
+        }
+
+        const data = new URLSearchParams(new FormData(form));
+        data.append('page', location.href);
+
+        submit.disabled = true;
+        const label = submit.textContent;
+        submit.textContent = '送信しています…';
+        setStatus('', false);
+
+        try {
+            const res = await fetch(endpoint, { method: 'POST', body: data });
+            let result = null;
+            try { result = await res.json(); } catch (_) { /* 応答が読めない場合は下で判定 */ }
+            if (!res.ok || (result && result.ok === false)) throw new Error((result && result.error) || 'send failed');
+
+            const name = form.elements.name.value.trim();
+            const done = document.createElement('div');
+            done.className = 'contact-done';
+            done.setAttribute('tabindex', '-1');
+            done.innerHTML =
+                '<span class="done-mark" aria-hidden="true">✓</span>' +
+                '<h3>送信しました!</h3>' +
+                '<p></p>' +
+                '<p>内容を確認して、メールでお返事します。数日たっても返信がない場合は、お手数ですがもう一度お送りいただくか、迷惑メールフォルダをご確認ください。</p>';
+            done.querySelector('p').textContent = name + ' 様、お問い合わせありがとうございます。';
+            form.replaceChildren(done);
+            done.focus();
+        } catch (err) {
+            submit.disabled = false;
+            submit.textContent = label;
+            const tooSoon = String(err && err.message) === 'too_soon';
+            setStatus(
+                (tooSoon
+                    ? '少し時間をおいてから、もう一度お試しください。'
+                    : '送信できませんでした。通信状況をご確認のうえ、もう一度お試しください。') +
+                (fallback ? 'うまくいかない場合は' + fallbackLink('こちらのフォーム') + 'からもお送りいただけます。' : ''),
+                true
+            );
+        }
+    });
+})();
+
+// ==========================================
 // ページ読み込み時に実行
 // ==========================================
 buildSlideshow();
